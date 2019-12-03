@@ -10,15 +10,15 @@ _values = values; // Backup
 
 noun = 15;
 verb = 2;
-const maxi_noun = 15;
+const maxi_noun = 99;
 const maxi_verb = maxi_noun;
-// const expected = 19690720;
-const expected = 3706713; // 12+2
+const expected = 19690720;
+// const expected = 3706713; // 12+2
 
 for (let noun = 0; noun < maxi_noun; noun++) {
     for (let verb = 0; verb < maxi_verb; verb++) {
         var r = compute(noun, verb);
-        console.log('noun:%d, verb:%d, temp : %d', noun, verb, r);
+        // console.log('noun:%d, verb:%d, temp : %d', noun, verb, r);
         if (r == expected){
             console.log('Found noun=%d verb=%d', noun, verb);
             const r = 100 * noun + verb
