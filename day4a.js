@@ -14,12 +14,18 @@ var lines = content.split(/\r\n?/);
 testNumber(123455, true);
 testNumber(123445, true);
 testNumber(112345, true);
-testNumber(112344, true);
+
 testNumber(112277, true);
+testNumber(112227, true);
 testNumber(123337, false);
-testNumber(112333, false);
+testNumber(112333, true);
 testNumber(123444, false);
 testNumber(111111, false);
+testNumber(112344, true);
+
+testNumber(112233, true);
+testNumber(123444, false);
+testNumber(111122, true);
 
 const from = 178416;
 const to = 676461;
@@ -49,23 +55,23 @@ function checkPassword(v){
 function hasTwoAdjDigits(v){
     var t = (''+v).split('');
     let exact2Digits = false;
-    for (let i = 1; i < t.length; i++) {
-        if (t[i]==t[i-1]){
-            //exact 2?
-            if (i>=t.length-1){
-                //end
-                //return true;
-                exact2Digits = true;
-            }else if (t[i]==t[i+1]){
-                return false;
-            }else{
-                // exact 2, continue, may several, but one is enough
-                //exact2Digits = true;
-                return true;
-            }
-            //return true;
+    var stack = [];
+    for (let i = 0; i < t.length; i++) {
+        const last = stack[stack.length-1]
+        if (last && last.v==t[i]){
+            ++last.count;
+        }else{
+            stack.push({v:t[i], count:1})
         }
     }
+
+    for (const q of stack) {
+        if (q.count==2){
+            // at least, one  group of 2 digits
+            return true;
+        }
+    }
+
     return exact2Digits;
 }
 
