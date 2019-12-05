@@ -27,7 +27,7 @@ while ( i < len) {
         }
         i=i+4
     }else if (v==99) {
-        i=i+1
+        ++i
         break
     }else{
         break
